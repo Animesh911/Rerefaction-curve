@@ -16,13 +16,10 @@ raref(data, samp_frac, threshold, 1)
 
 ##function for this code
 
-raref <- function(x, MARGIN, samp_frac, threshold, simulation, ...)
+raref <- function(x, samp_frac, threshold, simulation, ...)
 {
 	## convert data.frame to matrix for faster access
 	taxonid <- as.matrix(x)
-	
-	if (nrow(.) == 1 && MARGIN == 2)				##MARGIN hold data column and test if only one column is there
-   	x <- t(x) 
 
 	final_simulated_threshold_value <- data.frame(matrix(ncol = length(threshold), nrow = length(samp_frac))) # row is samp_frac(i) col is threshold(j)
 	colnames(final_simulated_threshold_value) <- threshold
@@ -50,12 +47,12 @@ raref <- function(x, MARGIN, samp_frac, threshold, simulation, ...)
 		# observed number of species
 		thresh_count <- 1
 		for (j in threshold){
-			subset <- counts[,which(counts[1,] > j), drop=FALSE] #>= check #questions: unclassified value '0' remove or not
+			subset <- counts[,which(counts[1,] >= j), drop=FALSE] #>= check #questions: unclassified value '0' remove or not
 			if ("0" %in% colnames(subset)){					#check if only 1 vlaues are there; 
-				classified_taxa <- rowSums(subset[, -1, drop=FALSE])
+				classified_taxa <- ncol(subset[, -1, drop=FALSE])
 				simulated_value[sim,thresh_count] <- classified_taxa
 			}else{								#if not check put the classified as the frequency
-				simulated_value[sim,thresh_count] <- rowSums(subset)
+				simulated_value[sim,thresh_count] <- ncol(subset)
 			}
 			thresh_count <- thresh_count +1
 		}
