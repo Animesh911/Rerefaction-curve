@@ -47,7 +47,7 @@ raref <- function(x, samp_frac, threshold, simulation, ...)
 		# observed number of species
 		thresh_count <- 1
 		for (j in threshold){
-			subset <- counts[,which(counts[1,] >= j), drop=FALSE] #>= check #questions: unclassified value '0' remove or not
+			subset <- counts[,which(counts[1,] >= j), drop=FALSE] 		#>= criteria for species presence
 			if ("0" %in% colnames(subset)){					#check if only 1 vlaues are there; 
 				classified_taxa <- ncol(subset[, -1, drop=FALSE])
 				simulated_value[sim,thresh_count] <- classified_taxa
