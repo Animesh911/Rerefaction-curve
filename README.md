@@ -1,5 +1,6 @@
 ## rerefaction
-##This is trial version and I endedup making accumualation curve
+
+***(This is trial version and I endedup making accumualation curve)***
 
 test.txt: text file containing taxonomic ids per row.
 
