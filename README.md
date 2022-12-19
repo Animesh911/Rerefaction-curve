@@ -16,12 +16,12 @@
       threshold <- c(0,2,10,20, 30, 40,60,70, 80, 90, 100,150, 200)
 
 ## rarefaction_parallel.R: This script takes taxonomic ids, and generates table containing unique taxonomic ids present in different sampling effort.
- #Things to consider: 
-  Good part: It offer to run everything in parallel. 
-  Sampling: Continuously discarding particular percentage of sample from the left out sample -> conut unique species (taxonomic ids) left
-  Simulation: Option to iterate to generate average value
-  Threshold: Minimum count to claim it as species, or minimise FALSE positive. Higher value may disrupt the TRUE positive at final sampling effort
-  Subset: Subset for customised taxonomy ranks eg., for class, order, family: subset(my_data, select = -c(taxid, kingdom, phylum, genus, species))
+ Things to consider: 
+ Good part: It offer to run everything in parallel. 
+ Sampling: Continuously discarding particular percentage of sample from the left out sample -> conut unique species (taxonomic ids) left
+ Simulation: Option to iterate to generate average value
+ Threshold: Minimum count to claim it as species, or minimise FALSE positive. Higher value may disrupt the TRUE positive at final sampling effort
+ Subset: Subset for customised taxonomy ranks eg., for class, order, family: subset(my_data, select = -c(taxid, kingdom, phylum, genus, species))
   
   Extract output from kraken2 containing taxonomic ids (3rd column) 
   eg., test.txt:
