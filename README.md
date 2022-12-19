@@ -25,6 +25,7 @@
   
   Extract output from kraken2 containing taxonomic ids (3rd column) 
   eg., test.txt:
+  ```
   523845
   0
   0
@@ -35,12 +36,15 @@
   0
   1977087
   2026742
-
+```
   #Convert to final_data.txt using taxonkit: 
+  ```
   taxonkit lineage test.txt 2>/dev/null | taxonkit reformat -t -a | csvtk -H -t cut -f 1,4 | awk '{if (!$2) {print $1 "\t" ";;;;;;"} else {print $1 "\t" $2}}' | csvtk -H  sep -f 2 -s ';' -R   -t | awk 'BEGIN { FS = OFS = "\t" } { for(i=1; i<=NF; i++) if($i ~ /^ *$/) $i = 0 }; 1' | csvtk add-header -n taxid,kingdom,phylum,class,order,family,genus,species  -t  1>test_final_data.txt
+  ```
   
   Preprocess: convert taxonomic ids to extract taxonomic ids for different taxonomic levels
   #test_final_data.txt
+  ```
   taxid   kingdom phylum  class   order   family  genus   species
   523845  2157    28890   183939  2182    2183    155862  2186
   0       0       0       0       0       0       0       0
@@ -52,7 +56,7 @@
   0       0       0       0       0       0       0       0
   1977087 2       1224    0       0       0       0       1977087
   2026742 2       142182  0       0       0       0       2026742
-  
+  ```
   
  
  #Run: This script takes sequences, and offer to run everything in parallel.
